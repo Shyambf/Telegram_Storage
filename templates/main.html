@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>TelegramStorage</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar sticky-top bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+
+          <a class="navbar-brand noselect">TelegramStorage</a>
+          {% if register %}
+          <div class="center">
+            <form class="d-flex" role="search" action="query" method="POST">
+              <input class="form-control me-2" name="query" id="query" type="search" placeholder="Поиск" aria-label="Поиск">
+              <button class="btn btn-dark" type="submit">Поиск</button>
+            </form>
+          </div>
+          {% endif %}
+
+          <div>
+
+            {% if not register %}
+            <a href="{{ url_for('register') }}">
+            <button class="btn btn-dark" type="submit">
+            <img src="/static/img/profile_icon.svg" alt=""> Вход/Регистрация</button></a>
+
+            {% else %}
+            <div class="dropstart">
+              <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ email }}
+              </button>
+              <ul class="dropdown-menu">
+                <!-- <li><a class="dropdown-item" href="#">Личный кабинет</a></li> -->
+                <li><a class="dropdown-item" href="/register">Выход из учетной записи</a></li>
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+
+      <div class="colored-bg">
+
+        <div>
+          <table width="100%">
+            <tr>
+             <td width="15%">
+              <form action="/redir/{{ holder }}">
+                <button type="button submit" class="btn btn-success back-button">🠔 Назад</button>
+              </form>
+             </td>
+             <td class="normal-text">
+              <div class="adress-string">
+                <img class="noselect" src="/static/img/folder.svg" width="30px", height="30px">
+                {{ adress }}
+              </div>
+             </td>
+            </tr>
+          </table>
+        
+
+        <table class="file-table">
+          <tr class="header">
+            <th><br></th>
+            <th>Название</th>
+            <th style="width: 200px;">Размер файла</th>
+            <th>
+            </th>
+          </tr>
+
+          {% if not search %}
+            <tr class="add-file">
+              <td colspan="4" class="add-file">
+                <button type="button" class="btn transponent-btn" data-bs-toggle="modal" data-bs-target="#add-file">Добавить новый файл <img src="/static/img/plus.svg" alt="+"></button>
+              </td>
+            </tr>
+
+            <tr class="add-rep">
+              <td colspan="4" class="add-rep">
+                <button type="button" class="btn transponent-btn" data-bs-toggle="modal" data-bs-target="#add-rep">Добавить новую папку <img src="/static/img/plus.svg" alt="+"></button>
+              </td>
+            </tr>
+          {% endif %}
+          
+          {% for file in folder %}
+          <tr class="file-row">
+            <td>
+              <img class="noselect" src="/static/img/folder.svg", style="width: 35px; height: 35px">
+            </td>
+            <td> {{ file[0] | safe }} </td>
+            <td style="width: 100px;">
+              <form action="/redir/{{ file[1] }}">
+              <input type="submit" value="Открыть" /></form>
+            </td>
+            <td style="width: 50px;">
+              <div class="dropup">
+                <button class="btn transponent-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img class="noselect" src="/static/img/options_icon.svg">
+                </button>
+                <ul class="dropdown-menu">
+                  <li><form action="/delete_folder/{{ file[1] }}">
+                    <input type="submit" value="Удалить папку" />
+                  </form></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+
+          {% for file in files %}
+          <tr class="file-row">
+            <td>
+              <img class="noselect" src="/static/img/{{ file[0] }}">
+            </td>
+            <td> {{ file[1] | safe }}  </td>
+            <td style="width: 100px;"> {{ file[2] }} </td>
+            <td style="width: 50px;">
+              <div class="dropup">
+                <button class="btn transponent-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img class="noselect" src="/static/img/options_icon.svg">
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <form action="/download/{{ file[3] }}">
+                    <input type="submit" value="Загрузить файл" /></form>
+                  </li>
+                  <li><form action="/delete/{{ file[3] }}">
+                    <input type="submit" value="Удалить файл" />
+                  </form></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+
+      </div>
+
+      <div class="modal fade" id="add-file" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title noselect" id="staticBackdropLabel">Добавление файла</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="" method="POST" enctype="multipart/form-data">
+                <input type=file name=file multiple />
+                
+                <input type=submit value=Загрузить! id="btnFetch"><a id="loading"></a>
+              </form>
+            </div>
+            <!-- <div style="margin:3em;">
+              <form class="form-inline" id="topicForm" action="" method="POST">
+                <button type="button" id="btnFetch" class="btn btn-primary mb-2">Submit</button>
+              </form>
+            </div> -->
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="add-rep" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title noselect" id="staticBackdropLabel">Добавление папки</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" enctype=multipart/form-data id="add-rep">
+                  <input id="email-login" class="form-control inline" name="email-login" placeholder="Название папки">
+                  <button type="button submit" class="btn btn-success gx-5">Создать</button>
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модальное окно -->
+      <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Упс! Что-то пошло не так</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+              {{ wrong_password }}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="/static/js/popper.min.js" ></script>
+      <script src="/static/js/bootstrap.min.js"></script>
+
+      {% if wrong_password %}
+        <script>
+          var exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'), {})
+          exampleModal.show()
+        </script>
+      {% endif %}
+      <script>
+        $(document).ready(function() {
+      $("#btnFetch").click(function() {
+      $('#loading').html(
+        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`
+          );
+        });
+      });
+      </script>
+    
+</body>
+</html>

@@ -1,0 +1,194 @@
+td, th
+{
+    text-align: center; 
+    vertical-align: middle;
+    min-width: 40px;
+    padding: 10px 10px 5px 5px;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+
+.tab-content{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    background-color: white;
+    padding: 3% 3% 3% 3%;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px;
+}
+
+.colored-bg{
+    display: grid;
+    place-items: start center; 
+    width: 100%;
+    min-height: 100vh;
+    background: -webkit-linear-gradient(top right, #5B05BC, #191126);
+    background: -moz-linear-gradient(top right, #5B05BC, #191126);
+    background: linear-gradient(to bottom left, #5B05BC, #191126);
+  }
+
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+    pointer-events: none;
+}
+
+/* .file-table, th, td {
+    border: 1px solid black;
+} */
+
+.file-table {
+    overflow: hidden;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: white;
+    border-radius: 10px;
+    min-width: 800px;
+}
+
+.header{
+    border-radius: 10px; 
+    background-color: #7fc7ff;
+}
+
+.add-file:hover {
+    background-color: rgb(151, 249, 153);
+}
+
+.file-row:hover {
+    background-color: rgb(232,240,254);
+}
+
+.add-rep:hover {
+    background-color: rgb(230, 218, 117);
+}
+
+.transponent-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.transponent-btn:hover {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+/* input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: rgb(33,37,41);
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+  
+input[type=file]::file-selector-button:hover {
+  background: rgb(33,37,41);
+} */
+
+#input-dark {
+    padding: 10px 10px; 
+    background: rgb(33,37,41);
+    border: 0 none;
+    cursor: pointer;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    border-radius: 10px;
+}
+
+input[type=submit] {
+    padding: 5px 5px;
+    margin-left: 20px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.header-text {
+    position: absolute;
+    color: #fff;
+    margin-top: 10%;
+}
+
+.header-text1 {
+    position: absolute;
+    color: #fff;
+    margin-top: 13%;
+}
+
+.header-text2 {
+    position: absolute;
+    color: #fff;
+    margin-top: 15%;
+}
+
+.form-control {
+    max-width: 95%;
+}
+
+.center-div {
+    color: aliceblue;
+    margin-top: 15%;
+    text-align: center;
+}
+
+.adress-string {
+    margin-top: 5%;
+    background-color: aliceblue;
+    padding-left: 2%;
+    border-radius: 7px;
+    font-size: large;
+}
+
+.normal-text {
+    text-align: left;
+}
+
+.back-button {
+    margin-top: 30%;
+}
+
+#email-login {
+    width: 70%;
+    white-space: nowrap;
+    display: inline-block;
+    margin-right: 50px;
+}
+
+#add-rep {
+    white-space: nowrap;
+}
+
+#query {
+    color:black
+}

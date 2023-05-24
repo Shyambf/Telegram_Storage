@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Регистрация</title>
+</head>
+
+<body>
+  <!-- Модальное окно -->
+  <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Упс! Что-то пошло не так</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          {{ wrong_password }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar sticky-top bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand noselect">TelegramStorage</a>
+    </div>
+  </nav>
+
+  <div class="colored-bg">
+    
+  <div class="tab-content">
+
+    <!-- tabs menu  -->
+    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="tab-login" data-bs-toggle="tab" data-bs-target="#login" href="#login" role="tab"
+          aria-controls="pills-login" aria-selected="true">Войти в аккаунт</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="tab-register" data-bs-toggle="tab" data-bs-target="#register" href="#register" role="tab"
+          aria-controls="pills-register" aria-selected="false">Зарегестрироваться</a>
+      </li>
+    </ul>
+      <!-- login menu -->
+      <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="tab-login">
+        <h2 class="noselect">Вход в систему</h2><br>
+        <form class="was-validated" action="" method="POST">
+      
+      <!-- Email input -->
+      <div class="form-floating mb-3">
+        <input class="form-control" name="email-login" placeholder="examle@mail.ex" required type="email">
+        <label for="email-input">Адрес электронной почты</label>
+        <div class="invalid-feedback noselect">
+          Пожалуйста, введите почту
+        </div>
+    </div>
+
+      <!-- Password input -->
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" name="password-login" placeholder="???" required minlength="1">
+        <label for="password-input">Пароль</label>
+        <div class="invalid-feedback noselect">Пожалуйста, введите пароль</div>
+      </div>  
+
+      <!-- <div class="row mb-4">
+        <div class="justify-content-center">
+          <div class="form-check mb-3 mb-md-0">
+            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+            <label class="form-check-label noselect" for="loginCheck">Оставаться в системе</label>
+          </div>
+        </div>
+      </div> -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Войти!</button>
+    </div>
+  </form>
+        
+    <!-- register menu -->  
+    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="tab-register">
+        <form class="was-validated" action="" method="POST">
+        <h2 class="noselect">Регистрация в систему</h2><br>
+    
+          <div class="form-floating mb-3">
+              <input class="form-control" name="email-input" placeholder="examle@mail.ex" required type="email">
+              <label for="email-input">Адрес электронной почты</label>
+              <div class="invalid-feedback noselect">
+                Пожалуйста, введите почту
+              </div>
+          </div>
+    
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="password-input" placeholder="???" required minlength="8">
+            <label for="password-input">Пароль</label>
+            <div class="invalid-feedback noselect">Пожалуйста, введите пароль</div>
+          </div>
+    
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="password-input1" placeholder="???" required minlength="8">
+            <label for="password-input1">Повторите пароль</label>
+            <div class="invalid-feedback noselect">Пожалуйста, заполните это поле</div>
+          </div>
+
+          <h6>&emsp;Для того, чтобы пользоваться TelegramStorage, необходимо зайти в свой аккаунт Telegram. 
+            Установите и запустите файл, находящийся ниже, после этого введите код, полученный в результате её выполнения 
+          </h6>
+
+          <button class="btn btn-primary mb-3">
+            <a href="/static/app.exe" download style="color: aliceblue">Скачать .exe</a>
+          </button><br>
+          
+          <div class="form-floating mb-3">
+            <input class="form-control" name="code-input" placeholder="???" required minlength="8">
+            <label for="password-input1">Введите полученный код</label>
+            <div class="invalid-feedback noselect">Пожалуйста, заполните это поле</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" data-bs-toggle="modal">Зарегестрироваться!</button>
+        </form>
+    </div>
+
+  </div>
+</div>
+
+
+  <script src="/static/js/bootstrap.min.js"></script>
+  {% if wrong_password %}
+  <script>
+    var exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'), {})
+    exampleModal.show()
+  </script>
+  {% endif %}
+</body>
+</html>

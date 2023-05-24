@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>TelegramStorage</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar sticky-top bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+
+          <a class="navbar-brand noselect">TelegramStorage</a>
+          {% if register %}
+          <div class="center">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+              <button class="btn btn-dark" type="submit">Поиск</button>
+            </form>
+          </div>
+          {% endif %}
+
+          <div>
+
+            {% if not register %}
+            <a href="{{ url_for('register') }}">
+            <button class="btn btn-dark" type="submit">
+            <img src="/static/img/profile_icon.svg" alt=""> Вход/Регистрация</button></a>
+
+            {% else %}
+            <div class="dropstart">
+              <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ email }}
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Действие</a></li>
+                <li><a class="dropdown-item" href="#">Другое действие</a></li>
+                <li><a class="dropdown-item" href="/register">Выход из учетной записи</a></li>
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+
+    <div class="colored-bg">
+      <div class="center-div">
+        <h3>Добро пожаловать в систему TelegramStorage!</h3>
+        <h4>Здесь вы можете хранить документы на надежных серверах, а также быстро получать их</h4>
+        <h4>Для того, чтобы начать пользоваться функционалом проекта, пройдите регистрацию</h4>
+      </div>
+    </div>
+
+        
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="/static/js/popper.min.js" ></script>
+      <script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

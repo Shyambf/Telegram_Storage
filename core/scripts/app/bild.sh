@@ -1,0 +1,1 @@
+pyinstaller --console --icon=icon.ico --onefile app.py
